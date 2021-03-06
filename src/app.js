@@ -68,7 +68,7 @@ new Vue({
                 item.status = 0;
             }else{
                 item.isCheck = true;
-                item.isCheck = 1;
+                item.status = 1;
             }
         },
         removeItem: function(item) {
@@ -81,6 +81,11 @@ new Vue({
             return this.todos.filter((el) => {
                 return this.current < 0 ? true : this.current === el.status; 
             },this)
-        }
+        },
+        labels() {
+            return this.options.reduce(function(a, b) {
+              return Object.assign(a, { [b.value]: b.label })
+            }, {})
+          }
     }
 })

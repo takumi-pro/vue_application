@@ -23,7 +23,7 @@
                 <input type="checkbox" @change="checkItem(item)">
                 <span :class="{ 'check': item.isCheck }">{{ item.comment }}</span>
                 <div class="status" style="display:inline">
-                    <button>{{ item.status }}</button>
+                    <button>{{ labels[item.status] }}</button>
                 </div>
                 
                 <div class="button" style="display:inline">
