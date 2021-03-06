@@ -1,15 +1,29 @@
 const path = require('path');
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 module.exports = {
-    mode: 'development',
+  mode: 'development',
   entry: './src/app.js',
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  devServer: {
-    // webpackの扱わないファイル(HTMLや画像など)が入っているディレクトリ
-    contentBase: path.resolve(__dirname, "public"),
-    port: 9000,
+  module: {
+    rules: [
+      {
+        test: /\.vue$/, // ファイルが.vueで終われば...
+        loader: "vue-loader", // vue-loaderを使う
+      },
+    ]
   },
+  resolve: {
+    // Webpackで利用するときの設定
+    alias: {
+      vue$: "vue/dist/vue.esm.js"
+    },
+  },
+  plugins: [
+    // Vueを読み込めるようにするため
+    new VueLoaderPlugin()
+  ],
 };

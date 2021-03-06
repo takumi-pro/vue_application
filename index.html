@@ -4,11 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./app.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="test">
-        
+    <div id="app">
+        <h2>タスクの追加</h2>
+        <form class="add-form" @submit.prevent="doAdd">
+            <input type="text" v-model="inputMsg">            
+            <button type="submit">追加</button>
+        </form>
+        <label v-for="label in options">
+            <input type="radio" v-model="current" :value="label.value">
+            {{ label.label }}
+        </label>
+        <div>
+            <li v-for="item in computedTodos" :key="item.id" class="todo-list">
+                <input type="checkbox" @change="checkItem(item)">
+                <span :class="{ 'check': item.isCheck }">{{ item.comment }}</span>
+                <div class="status" style="display:inline">
+                    <button>{{ item.status }}</button>
+                </div>
+                
+                <div class="button" style="display:inline">
+                    <button @click="removeItem(item)">削除</button>
+                </div>
+            </li>
+        </div>
     </div>
     <script src="./dist/bundle.js"></script>
 </body>
